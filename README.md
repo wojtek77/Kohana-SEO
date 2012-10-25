@@ -1,10 +1,12 @@
-# SEO friendly url
+# SEO friendly url for Kohana 3.3.0 or higher
+
+older versions you search in separate branches
 
 ## Usage
 
-1. Copy the directory "seo" to directory "modules" in project Kohana
+1\. Copy the directory "seo" to directory "modules" in project Kohana
 
-2. Add module in bootstrap:
+2\. Add module in bootstrap:
 
 **application/bootstrap.php**
 
@@ -14,8 +16,8 @@
 
 **application/classes/seo.php**
 
-	class SEO extends Kohana_SEO {
-		
+	class SEO extends Kohana_SEO
+	{
 		static protected $map =
 			array(
 				1 => array('welcome' => array('index' => 'welcome-to-our-website')),
@@ -27,16 +29,16 @@
 
 **application/classes/route.php**
 
-	class Route extends Kohana_Route {
-	 
-		public function matches($uri)
+	class Route extends Kohana_Route
+	{
+		public function matches(Request $request)
 		{
-			$controller_action = seo::get_controller_action($uri);
+			$controller_action = seo::get_controller_action($request);
 			
 			return
 				isset($controller_action)
 					?   array_combine(array_keys($this->_defaults), $controller_action)
-					:   parent::matches($uri);
+					:   parent::matches($request);
 		}
 	}
 

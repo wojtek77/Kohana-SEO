@@ -28,12 +28,12 @@ class Kohana_SEO {
     /**
      * Get controller and action from friedly url
      * 
-     * @param   string url
-     * @return  array|null
+     * @param Request $request
+     * @return array|null
      */
-    static public function get_controller_action($uri)
+    static public function get_controller_action(Request $request)
     {
-        if (preg_match('/-(\d+)$/', $uri, $w))
+        if (preg_match('/-(\d+)$/', $request->uri(), $w))
         {
             $key = $w[1];
             
