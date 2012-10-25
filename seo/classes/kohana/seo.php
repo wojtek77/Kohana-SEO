@@ -29,7 +29,7 @@ class Kohana_SEO {
      * Get controller and action from friedly url
      * 
      * @param   string url
-     * @return  mixed
+     * @return  array|null
      */
     static public function get_controller_action($uri)
     {
@@ -54,11 +54,12 @@ class Kohana_SEO {
     /**
      * Create friedly url from controller and action
      * 
-     * @param  string  controller
-     * @param  string  action
+     * @param string $controller
+     * @param string $action
+     * @param array|object $query_data  parameters for GET as a couple of key-value for example array('id'=>'xxx')
      * @return string  friendly-url
      */
-    static public function friendly_url($controller, $action)
+    static public function friendly_url($controller, $action, $query_data=null)
     {
         /**
          * table of friendly-url
@@ -77,6 +78,9 @@ class Kohana_SEO {
         }
         
         return
-            isset($map_key[$controller][$action]) ? urlencode($map_key[$controller][$action]) : null;
+            isset($map_key[$controller][$action])
+                ?   urlencode($map_key[$controller][$action])
+                        .(isset($query_data) ? '?'.http_build_query($query_data,'','&amp;') : '')
+                :   null;
     }
 }

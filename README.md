@@ -42,7 +42,13 @@
 
 5\. Example in controller:
 
+	/* without query */
 	$this->template->link = HTML::anchor(SEO::friendly_url('welcome', 'index'), 'link - welcome');
+	
+	/* with query */
+	$this->template->link = HTML::anchor(SEO::friendly_url('welcome', 'index', array('id'=>'xxx')), 'link - welcome');
+	// then to get the value of the "id"
+	// $id = $this->request->query('id');
 
 6\. In view:
 
